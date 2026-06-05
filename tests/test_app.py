@@ -15,6 +15,7 @@ def reset_activities_state():
 
 
 client = TestClient(app)
+# Tests intentionally cover signup and unregister happy/error paths.
 
 
 def test_get_activities_returns_seed_data():

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // UI state is refreshed after signup/unregister so cards stay in sync.
   const activitiesList = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
