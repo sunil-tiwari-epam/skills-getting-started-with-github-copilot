@@ -15,6 +15,7 @@ app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
 
 SCHOOL_EMAIL_DOMAIN = "mergington.edu"
+# Exercise note: keep a single school-domain constant for signup validation.
 
 # Mount the static files directory
 current_dir = Path(__file__).parent
