@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
-      const response = await fetch("/activities");
+      const response = await fetch("/activities", { cache: "no-store" });
       const activities = await response.json();
 
       // Clear loading message
@@ -35,7 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const participantsMarkup = details.participants.length
           ? details.participants
-              .map((participant) => `<li class="participant-item">${participant}</li>`)
+              .map(
+                (participant) => `
+                  <li class="participant-item">
+                    <span class="participant-email">${participant}</span>
+                    <button
+                      type="button"
+                      class="delete-participant"
+                      data-activity="${encodeURIComponent(name)}"
+                      data-email="${encodeURIComponent(participant)}"
+                      aria-label="Unregister ${participant}"
+                      title="Unregister"
+                    >
+                      x
+                    </button>
+                  </li>
+                `
+              )
               .join("")
           : '<li class="participant-empty">No participants yet</li>';
 
@@ -66,6 +82,33 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching activities:", error);
     }
   }
+
+  activitiesList.addEventListener("click", async (event) => {
+    const target = event.target.closest(".delete-participant");
+    if (!target) {
+      return;
+    }
+
+    const activity = target.dataset.activity;
+    const email = target.dataset.email;
+
+    try {
+      const response = await fetch(`/activities/${activity}/participants/${email}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        showMessage(result.message, "success");
+        await fetchActivities();
+      } else {
+        showMessage(result.detail || "An error occurred", "error");
+      }
+    } catch (error) {
+      showMessage("Failed to unregister participant. Please try again.", "error");
+      console.error("Error unregistering participant:", error);
+    }
+  });
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
