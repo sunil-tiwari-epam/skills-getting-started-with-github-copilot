@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // UI state is refreshed after signup/unregister so cards stay in sync.
   // Step workflow retrigger note: static UI updates are intentionally committed.
+  // Step 3 retry: ensure app.js is part of this push diff.
   const activitiesList = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
