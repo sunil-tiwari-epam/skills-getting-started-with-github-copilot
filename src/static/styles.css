@@ -29,6 +29,7 @@ header h1 {
 }
 
 main {
+  /* Mobile-first layout; desktop switches to grid in media query below. */
   display: flex;
   flex-direction: column;
   gap: 30px;
