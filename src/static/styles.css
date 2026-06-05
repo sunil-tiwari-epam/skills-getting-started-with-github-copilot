@@ -30,6 +30,7 @@ header h1 {
 
 main {
   /* Mobile-first layout; desktop switches to grid in media query below. */
+  /* Keep spacing consistent between cards and signup form across breakpoints. */
   display: flex;
   flex-direction: column;
   gap: 30px;
