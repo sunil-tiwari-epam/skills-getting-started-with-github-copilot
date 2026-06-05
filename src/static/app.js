@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // UI state is refreshed after signup/unregister so cards stay in sync.
+  // Step workflow retrigger note: static UI updates are intentionally committed.
   const activitiesList = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <!-- participant info section rendered by app.js -->
           <div class="participants-section">
             <h5>Participants</h5>
             <ul class="participants-list">
